@@ -18,7 +18,7 @@ function MessageForm() {
     dispatch({
       type: "POST_MSG",
       payload: {
-        msg,
+        content: msg,
       },
     });
   };
