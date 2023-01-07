@@ -7,7 +7,19 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // GET route code here
-
+  if(req.isAuthenticated()) {
+  const queryText = 'SELECT * FROM "message" ORDER BY "id";';
+  pool.query(queryText)
+  .then((result) => {
+    console.log('GET success!', result);
+    res.send(result.rows);
+  }).catch((e) => {
+    console.log('Error in GET msg', e);
+    res.sendStatus(500)
+  })
+  }else {
+    res.sendStatus(403)
+  }
 });
 
 /**
@@ -26,7 +38,7 @@ router.post('/', (req, res) => {
         res.sendStatus(500);
       });                 
   }else {
-    res.sendStatus(403);
+    res.sendStatus(403)
   }
 
 });

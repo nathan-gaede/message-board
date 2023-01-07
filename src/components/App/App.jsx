@@ -20,6 +20,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import MessageForm from "../MessageForm/MessageForm";
+import MessageList from "../MessageList/MessageList";
 
 import "./App.css";
 

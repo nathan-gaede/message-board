@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CardHeader from "@mui/material/CardHeader";
 import "../App/App.css";
+import MessageList from "../MessageList/MessageList";
 
 function MessageForm() {
   const [msg, setMsg] = useState("");
@@ -44,6 +45,7 @@ function MessageForm() {
         <br></br>
         <br></br>
         <Button onClick={submitForm}> Post Message </Button>
+        <MessageList />
       </Card>
     </div>
   );
