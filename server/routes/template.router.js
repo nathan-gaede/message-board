@@ -43,4 +43,23 @@ router.post('/', (req, res) => {
 
 });
 
+//Reply POST route
+router.post('/', (req, res) => {
+  console.log('is authenticated?', req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    //Need a JOIN here
+    const queryText = `INSERT INTO "user_message" ("user_id", "message_id", "reaction")
+                       VALUES ($1, $2, $3) RETURNING "id";`;
+      pool.query(queryText, [req.user.id, req.body.id, req.body.reaction]).then((result) => {
+       res.sendStatus(201); 
+      }).catch((e) => {
+        console.log(e);
+        res.sendStatus(500);
+      });                 
+  }else {
+    res.sendStatus(403)
+  }
+
+});
+
 module.exports = router;

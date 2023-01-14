@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import UserPage from "../UserPage/UserPage";
 
 function MessageList() {
   const msgList = useSelector((store) => store.message);
+  const user = useSelector((store) => store.user);
+  console.log("What is user store data?", user);
   //   console.log(msgList);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -14,6 +17,22 @@ function MessageList() {
   useEffect(() => {
     dispatch({ type: "FETCH_ALL_MSG" });
   }, []);
+
+  const checkUser = (userValue) => {
+    console.log("checkUser", userValue);
+    console.log("Finding user id", msgList);
+    if (userValue === user.id) {
+      return (
+        <Button className="delete" onClick={deletePost}>
+          Delete
+        </Button>
+      );
+    } else if (userValue !== msgList.user_id) {
+      return null;
+    }
+  };
+
+  const deletePost = () => {};
 
   const submitReply = (e) => {
     e.preventDefault();
@@ -53,7 +72,7 @@ function MessageList() {
             <Button>Upvote</Button>
             <Button>Downvote</Button>
             <Button>Edit</Button>
-            <Button>Delete</Button>
+            {checkUser(message.user_id)}
             <Button onClick={submitReply}>Reply</Button>
             <br></br>
             <br></br>
