@@ -4,11 +4,12 @@ import axios from 'axios';
 function * messageSaga() {
     yield takeLatest('POST_MSG', postMsg);
     yield takeLatest('FETCH_ALL_MSG', fetchAllMsg)
+    yield takeLatest('POST_REPLY', postReply);
 }
 
 function* postMsg(action) {
     try {
-        const msg = yield axios.post('/api/msg', action.payload)
+        yield axios.post('/api/msg', action.payload)
         console.log('Msg to POST is', action.payload);
 
     }catch(e) {
@@ -27,5 +28,16 @@ function* fetchAllMsg() {
         alert('Error in Fetch Msg')
     }
 }
+
+function * postReply(action) {
+    try {
+        yield axios.post('/api/reply', action.payload);
+        console.log('POST reply is', action.payload);
+    }catch(e) {
+        console.log(e);
+        alert('ERROR in POST reply')
+    }
+}
+
 
 export default messageSaga;

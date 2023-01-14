@@ -33,15 +33,8 @@ function MessageForm() {
           onChange={(e) => setMsg(e.target.value)}
           type="text"
           fullWidth
-          placeholder="Type Message Here"
+          placeholder="Type Reply Here"
         ></TextField>
-        <br></br>
-        <br></br>
-        <Button>Upvote</Button>
-        <Button>Downvote</Button>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
-        <Button>Reply</Button>
         <br></br>
         <br></br>
         <Button onClick={submitForm}> Post Message </Button>
