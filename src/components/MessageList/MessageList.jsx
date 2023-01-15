@@ -8,7 +8,7 @@ import UserPage from "../UserPage/UserPage";
 function MessageList() {
   const msgList = useSelector((store) => store.message);
   const user = useSelector((store) => store.user);
-  console.log("What is user store data?", user);
+  //   console.log("What is user store data?", user);
   //   console.log(msgList);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,19 +18,21 @@ function MessageList() {
     dispatch({ type: "FETCH_ALL_MSG" });
   }, []);
 
-  const checkUser = (userValue) => {
-    console.log("checkUser", userValue);
-    console.log("Finding user id", msgList);
-    if (userValue === user.id) {
-      return (
-        <Button className="delete" onClick={deletePost}>
-          Delete
-        </Button>
-      );
-    } else if (userValue !== msgList.user_id) {
-      return null;
-    }
-  };
+  //   const checkUser = (userValue) => {
+  //     console.log("checkUser", userValue);
+  //     console.log("Finding user id", msgList);
+  //     if (userValue === user.id) {
+  //       return (
+  //         <>
+  //           <Button onClick={deletePost}>Delete</Button>
+  //           <Button>Edit</Button>
+  //         </>
+  //       );
+  //     }
+  // else if (userValue !== msgList.user_id) {
+  //   return null;
+  // }
+  //   };
 
   const deletePost = () => {};
 
@@ -71,8 +73,16 @@ function MessageList() {
             ></TextField>
             <Button>Upvote</Button>
             <Button>Downvote</Button>
-            <Button>Edit</Button>
-            {checkUser(message.user_id)}
+            {/* https://beta.reactjs.org/learn/conditional-rendering 
+            Logical AND operator && 
+            Render when a condition is true and nothing otherwise. */}
+            {user.id === message.user_id && (
+              <>
+                <Button onClick={deletePost}>Delete</Button>
+                <Button>Edit</Button>
+              </>
+            )}
+            {/* {checkUser(message.user_id)} */}
             <Button onClick={submitReply}>Reply</Button>
             <br></br>
             <br></br>
