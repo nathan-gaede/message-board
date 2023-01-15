@@ -5,12 +5,14 @@ function * messageSaga() {
     yield takeLatest('POST_MSG', postMsg);
     yield takeLatest('FETCH_ALL_MSG', fetchAllMsg)
     yield takeLatest('POST_REPLY', postReply);
+    yield takeLatest('DELETE_POST', deletePost);
 }
 
 function* postMsg(action) {
     try {
         yield axios.post('/api/msg', action.payload)
         console.log('Msg to POST is', action.payload);
+        yield put ({ type: "FETCH_ALL_MSG" });
 
     }catch(e) {
         console.log(e);
@@ -36,6 +38,17 @@ function * postReply(action) {
     }catch(e) {
         console.log(e);
         alert('ERROR in POST reply')
+    }
+}
+
+function * deletePost(action) {
+    console.log('What is payload?', action.payload);
+    try {
+        yield axios.delete(`api/msg/${action.payload.id}`);
+        yield put ({ type: "FETCH_ALL_MSG" });
+    }catch(e) {
+        console.log('ERROR in DELETE', e);
+        alert("Something went wrong deleting post");
     }
 }
 

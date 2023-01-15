@@ -62,4 +62,19 @@ router.post('/', (req, res) => {
 
 });
 
+router.delete("/:id", (req, res) => {
+  if (req.isAuthenticated()) {
+    const queryText = `DELETE FROM "message" WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id]).then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("Server Error Deleting Post", e);
+      res.sendStatus(500);
+    });
+  }else {
+    res.sendStatus(403);
+  }
+});
+
 module.exports = router;

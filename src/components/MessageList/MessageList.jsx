@@ -34,7 +34,19 @@ function MessageList() {
   // }
   //   };
 
-  const deletePost = () => {};
+  const deletePost = (msgId) => {
+    console.log(msgId);
+    if (confirm("Are you sure you want to delete this post?")) {
+      dispatch({
+        type: "DELETE_POST",
+        payload: {
+          id: msgId,
+        },
+      });
+    }
+  };
+
+  const editPost = () => {};
 
   const submitReply = (e) => {
     e.preventDefault();
@@ -78,8 +90,8 @@ function MessageList() {
             Render when a condition is true and nothing otherwise. */}
             {user.id === message.user_id && (
               <>
-                <Button onClick={deletePost}>Delete</Button>
-                <Button>Edit</Button>
+                <Button onClick={() => deletePost(message.id)}>Delete</Button>
+                <Button onClick={editPost}>Edit</Button>
               </>
             )}
             {/* {checkUser(message.user_id)} */}
