@@ -21,6 +21,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import MessageForm from "../MessageForm/MessageForm";
 import MessageList from "../MessageList/MessageList";
+import EditMessage from "../EditMessage/EditMessage";
 
 import "./App.css";
 
@@ -97,6 +98,11 @@ function App() {
                 <LandingPage />
               )}
             </Route>
+
+            <Route exact path="/edit/:id">
+              <EditMessage />
+            </Route>
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>
               <h1>404</h1>

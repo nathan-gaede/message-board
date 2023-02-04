@@ -22,6 +22,21 @@ router.get('/', (req, res) => {
   }
 });
 
+router.get('/:id', (req, res) => {
+  if(req.isAuthenticated()) {
+    const queryText = 'SELECT * FROM "message" WHERE "id" = $1';
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
+      console.log('SELECT MSG TO EDIT success', result);
+      res.send(result.rows);
+    }).catch((e) => {
+      console.log('Error in select msg to edit', e);
+      res.sendStatus(500);
+    })
+  }
+});
+
+
 /**
  * POST route template
  */
@@ -70,6 +85,21 @@ router.delete("/:id", (req, res) => {
     })
     .catch((e) => {
       console.log("Server Error Deleting Post", e);
+      res.sendStatus(500);
+    });
+  }else {
+    res.sendStatus(403);
+  }
+});
+
+router.put("/:id", (req, res) => {
+  if (req.isAuthenticated()) {
+    const queryText = `UPDATE "message" SET "content" = $1 WHERE "user_id" = $2 AND "id" = $3;`;
+    pool.query(queryText, [req.body.content, req.user.id, req.body.id ]).then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log('Error in router.put', e);
       res.sendStatus(500);
     });
   }else {

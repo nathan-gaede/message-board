@@ -46,7 +46,10 @@ function MessageList() {
     }
   };
 
-  const editPost = () => {};
+  const editPost = (msgId) => {
+    console.log("Edit ID is", msgId);
+    history.push(`/edit/${msgId}`);
+  };
 
   const submitReply = (e) => {
     e.preventDefault();
@@ -91,7 +94,7 @@ function MessageList() {
             {user.id === message.user_id && (
               <>
                 <Button onClick={() => deletePost(message.id)}>Delete</Button>
-                <Button onClick={editPost}>Edit</Button>
+                <Button onClick={() => editPost(message.id)}>Edit</Button>
               </>
             )}
             {/* {checkUser(message.user_id)} */}

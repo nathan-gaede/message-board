@@ -6,6 +6,7 @@ function * messageSaga() {
     yield takeLatest('FETCH_ALL_MSG', fetchAllMsg)
     yield takeLatest('POST_REPLY', postReply);
     yield takeLatest('DELETE_POST', deletePost);
+    yield takeLatest('EDIT_MSG', editMsg);
 }
 
 function* postMsg(action) {
@@ -51,6 +52,27 @@ function * deletePost(action) {
         alert("Something went wrong deleting post");
     }
 }
+
+function* editMsg(action) {
+    console.log('What is payload?', action.payload);
+    try {
+        yield axios.put(`/api/msg/${action.payload.id}`,action.payload);
+        // yield put ({ type: "SET_MSG" });
+    }catch(e) {
+        console.log(e);
+        alert('Problem with PUT SAGA', e);
+    }
+}
+
+// function* fetchMsgToEdit(action) {
+//     try {
+//         console.log(action);
+//         yield axios.get(`/api/msg/${action.payload}`);
+//     }catch(e) {
+//         console.log(e);
+//         alert('Edit Msg SAGA error', e);
+//     }
+// }
 
 
 export default messageSaga;
