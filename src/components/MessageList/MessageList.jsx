@@ -12,7 +12,7 @@ function MessageList() {
   //   console.log(msgList);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [msg, setMsg] = useState("");
+  const [reply, setReply] = useState("");
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL_MSG" });
@@ -52,12 +52,13 @@ function MessageList() {
   };
 
   const submitReply = (e) => {
-    e.preventDefault();
-
+    // e.preventDefault();
+    // setReply("");
     dispatch({
       type: "POST_REPLY",
       payload: {
-        content: msg,
+        content: reply,
+        //parentId capture needed here.
       },
     });
   };
@@ -75,16 +76,17 @@ function MessageList() {
       <h1>Message List</h1>
       {msgList.map((message) => {
         return (
-          <div key={message.id}>
+          <div key={reply.id}>
             <h2> {message.content}</h2>
             {/* Conditional rendering using user store, edit and delete button won't
             render if id of message is not tied to user_id. msg.user_id needs to match 
             user.id*/}
             <TextField
-              onChange={(e) => setMsg(e.target.value)}
+              onChange={(e) => setReply(e.target.value)}
               type="text"
               fullWidth
-              placeholder="Type Message Here"
+              placeholder="Type Reply Here"
+              value={reply.id}
             ></TextField>
             <Button>Upvote</Button>
             <Button>Downvote</Button>

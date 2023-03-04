@@ -36,6 +36,7 @@ function * postReply(action) {
     try {
         yield axios.post('/api/reply', action.payload);
         console.log('POST reply is', action.payload);
+        yield put ({ type: "FETCH_ALL_MSG" });
     }catch(e) {
         console.log(e);
         alert('ERROR in POST reply')

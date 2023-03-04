@@ -15,7 +15,7 @@ function MessageForm() {
 
   const submitForm = (e) => {
     e.preventDefault();
-
+    setMsg("");
     dispatch({
       type: "POST_MSG",
       payload: {
@@ -33,7 +33,8 @@ function MessageForm() {
           onChange={(e) => setMsg(e.target.value)}
           type="text"
           fullWidth
-          placeholder="Type Reply Here"
+          placeholder="Type Message Here"
+          value={msg}
         ></TextField>
         <br></br>
         <br></br>

@@ -30,7 +30,7 @@ const EditMessage = () => {
   }, [id]);
 
   const submitReply = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch({
       type: "EDIT_MSG",
       payload: { content: msg, id },
@@ -42,13 +42,16 @@ const EditMessage = () => {
     <div>
       {JSON.stringify(message)}
       <h1>Edit Message</h1>
-      <h2>Message ID is {message.id}</h2>
-      <input
+      <h2>Message ID is {id}</h2>
+      <TextField
         type="text"
+        fullWidth
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
-      ></input>
-      <button onClick={submitReply}>Submit Changes</button>
+      ></TextField>
+      <br></br>
+      <br></br>
+      <Button onClick={submitReply}>Submit</Button>
     </div>
   );
 };
