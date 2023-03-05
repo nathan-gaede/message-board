@@ -51,14 +51,16 @@ function MessageList() {
     history.push(`/edit/${msgId}`);
   };
 
-  const submitReply = (e) => {
+  const submitReply = (msgId) => {
     // e.preventDefault();
-    // setReply("");
+    console.log(msgId);
+    // console.log(msgId);
     dispatch({
       type: "POST_REPLY",
       payload: {
         content: reply,
         //parentId capture needed here.
+        parent_id: msgId,
       },
     });
   };
@@ -78,6 +80,7 @@ function MessageList() {
         return (
           <div key={reply.id}>
             <h2> {message.content}</h2>
+            <h2>{message.parent_id}</h2>
             {/* Conditional rendering using user store, edit and delete button won't
             render if id of message is not tied to user_id. msg.user_id needs to match 
             user.id*/}
@@ -100,7 +103,7 @@ function MessageList() {
               </>
             )}
             {/* {checkUser(message.user_id)} */}
-            <Button onClick={submitReply}>Reply</Button>
+            <Button onClick={() => submitReply(message.id)}>Reply</Button>
             <br></br>
             <br></br>
           </div>

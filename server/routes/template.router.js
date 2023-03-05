@@ -44,9 +44,9 @@ router.post('/', (req, res) => {
   // POST route code here
   console.log('is authenticated?', req.isAuthenticated());
   if (req.isAuthenticated()) {
-    const queryText = `INSERT INTO "message" ("user_id", "content")
-                       VALUES ($1, $2) RETURNING "id";`;
-      pool.query(queryText, [req.user.id, req.body.content]).then((result) => {
+    const queryText = `INSERT INTO "message" ("user_id", "content", "parent_id")
+                       VALUES ($1, $2, $3) RETURNING "id";`;
+      pool.query(queryText, [req.user.id, req.body.content, req.body.parent_id]).then((result) => {
        res.sendStatus(201); 
       }).catch((e) => {
         console.log(e);
