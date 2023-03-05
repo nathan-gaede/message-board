@@ -7,7 +7,6 @@ const router = express.Router();
  */
 router.post("/", (req, res) => {
   // POST route code here
-  console.log("is authenticated?", req.isAuthenticated());
   if (req.isAuthenticated()) {
     const queryText = `INSERT INTO "message" ("user_id", "content", "parent_id")
                        VALUES ($1, $2, $3) RETURNING "id";`;

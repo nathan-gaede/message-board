@@ -35,7 +35,7 @@ function MessageList() {
   //   };
 
   const deletePost = (msgId) => {
-    console.log(msgId);
+    // console.log(msgId);
     if (confirm("Are you sure you want to delete this post?")) {
       dispatch({
         type: "DELETE_POST",
