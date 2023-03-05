@@ -51,16 +51,18 @@ function MessageList() {
     history.push(`/edit/${msgId}`);
   };
 
-  const submitReply = (e) => {
+  const submitReply = (id) => {
     // e.preventDefault();
     // setReply("");
     dispatch({
       type: "POST_REPLY",
       payload: {
         content: reply,
+        parentId: id,
         //parentId capture needed here.
       },
     });
+    console.log("reply is", reply);
   };
 
   //TODO: enter exact path in history.push
@@ -100,7 +102,7 @@ function MessageList() {
               </>
             )}
             {/* {checkUser(message.user_id)} */}
-            <Button onClick={submitReply}>Reply</Button>
+            <Button onClick={() => submitReply(message.id)}>Reply</Button>
             <br></br>
             <br></br>
           </div>

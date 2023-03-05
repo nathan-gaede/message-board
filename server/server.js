@@ -1,16 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
 
-const sessionMiddleware = require('./modules/session-middleware');
-const passport = require('./strategies/user.strategy');
+const sessionMiddleware = require("./modules/session-middleware");
+const passport = require("./strategies/user.strategy");
 
 // Route includes
-const userRouter = require('./routes/user.router');
-const msgRouter = require('./routes/template.router');
-const replyRouter = require('./routes/template.router')
+const userRouter = require("./routes/user.router");
+const msgRouter = require("./routes/template.router");
+const replyRouter = require("./routes/reply.router");
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,12 +24,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
-app.use('/api/user', userRouter);
-app.use('/api/msg', msgRouter);
-app.use('/api/reply', replyRouter);
+app.use("/api/user", userRouter);
+app.use("/api/msg", msgRouter);
+app.use("/api/reply", replyRouter);
 
 // Serve static files
-app.use(express.static('build'));
+app.use(express.static("build"));
 
 // App Set //
 const PORT = process.env.PORT || 5040;
