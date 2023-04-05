@@ -65,6 +65,10 @@ function MessageList() {
     });
   };
 
+  const upVote = (msgId) => {
+    console.log("Upvote ID is", msgId);
+  };
+
   //TODO: enter exact path in history.push
   //once the Protected Route is created in App.jsx
   // const displayMsg = (msgToDisplay) => {
@@ -91,7 +95,26 @@ function MessageList() {
               placeholder="Type Reply Here"
               value={reply.id}
             ></TextField>
-            <Button>Upvote</Button>
+            {/* POST/INSERT if vote for message by unique user
+            does not exist yet.
+            UPDATE if vote by that user for that message id
+             already exist. */}
+            {/* Add OnClick arrow function inside button
+            tags. need to pass
+            message id prop to upvote and Downvote
+            function above the return. */}
+            {/* Create two functions, upvote and downvote.
+            Dispatch payload to Saga. Payload will be 
+            message id. Server code will either set  numerical
+            value or subtract numerical value from reaction.
+            Either current value +1 or current value -1. */}
+            {/* Think about new post automatically receive
+          one upvote. Entry will be added to the 
+          user_message table. This will negate the need to 
+          perform an UPSERT later when user upvotes or 
+          downvotes an existing message. */}
+
+            <Button onClick={() => upVote(message.id)}>Upvote</Button>
             <Button>Downvote</Button>
             {/* https://beta.reactjs.org/learn/conditional-rendering 
             Logical AND operator && 

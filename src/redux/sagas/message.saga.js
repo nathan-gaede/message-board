@@ -9,6 +9,11 @@ function * messageSaga() {
     yield takeLatest('EDIT_MSG', editMsg);
 }
 
+//New Function* for upvote and Downvote functions.
+//UPSERT will be a PUT
+//Seperate routes for upvote and downvote,
+
+
 function* postMsg(action) {
     try {
         yield axios.post('/api/msg', action.payload)
@@ -34,7 +39,7 @@ function* fetchAllMsg() {
 
 function * postReply(action) {
     try {
-        yield axios.post('/api/reply', action.payload);
+        yield axios.post('/api/msg', action.payload);
         console.log('POST reply is', action.payload);
         yield put ({ type: "FETCH_ALL_MSG" });
     }catch(e) {
